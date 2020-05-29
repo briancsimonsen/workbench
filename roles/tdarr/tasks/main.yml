@@ -1,0 +1,38 @@
+---
+- name: Create Transcode Volume
+  docker_volume:
+    name: transcode
+    state: present
+  tags: tdarr
+  notify: restart tdarr
+
+- name: Create Tdarr Docker Container
+  docker_container:
+    name: tdarr
+    image: "haveagitgat/tdarr:{{tdarr_version}}"
+    pull: yes
+    user: root
+    restart_policy: unless-stopped
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    state: started
+    env:
+      PUID: "99"
+      PGID: "100"
+      TZ: "{{default_timezone}}"
+      MONGO_URL: "mongodb://{{tdarr_mongodb_username}}:{{tdarr_mongodb_password}}@mongodb:27017/{{tdarr_mongodb_database}}"
+    volumes:
+      - "{{project_directory}}/tdarr:/home/Tdarr/Documents/Tdarr"
+      - "{{media_directory}}:/home/Tdarr/media"
+      - transcode:/home/Tdarr/cache
+      - /etc/localtime:/etc/localtime:ro
+    labels:
+      traefik.http.routers.tdarr.entrypoints: "websecure"
+      traefik.http.routers.tdarr.tls: "true"
+      traefik.http.routers.tdarr.rule: "Host(`tdarr.{{project_tld}}`)"
+      traefik.http.routers.tdarr.middlewares: "default-headers@file,tdarr-auth@file"
+      traefik.http.routers.tdarr.service: "tdarr"
+      traefik.http.services.tdarr.loadbalancer.server.port: "8265"
+      traefik.enable: "true"
+  tags: tdarr

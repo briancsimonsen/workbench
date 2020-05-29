@@ -1,0 +1,4 @@
+---
+digitalocean_token: ""
+traefik_auth_secret: ""
+traefik_client_secret: ""

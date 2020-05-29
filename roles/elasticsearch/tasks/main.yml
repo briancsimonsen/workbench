@@ -1,0 +1,178 @@
+---
+- name: Create Filebeat Directories
+  file:
+    path: "{{project_directory}}/elasticsearch/filebeat"
+    state: directory
+  tags:
+    - filebeat
+    - elk
+
+- name: Filebeat Configuration Files
+  template: 
+    src: filebeat.docker.yml.j2 
+    dest: "{{project_directory}}/elasticsearch/filebeat/filebeat.docker.yml"
+  notify: restart filebeat
+  tags:
+    - filebeat
+    - elk
+
+- name: Create Filebeat Docker Container
+  docker_container:
+    name: filebeat
+    user: "root"
+    hostname: filebeat
+    image: "docker.elastic.co/beats/filebeat:{{elk_stack_version}}"
+    pull: yes
+    restart_policy: unless-stopped
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    state: started
+    env:
+      strict.perms: "false"
+      output.elasticsearch.hosts: "[elasticsearch:9200]"
+      setup.kibana.host: "kibana:5601"
+    volumes:
+      - "{{project_directory}}/elasticsearch/filebeat/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro"
+      - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+  tags:
+    - filebeat
+    - elk
+
+- name: Create Logstash Directories
+  file:
+    path: "{{project_directory}}/elasticsearch/logstash/pipeline"
+    state: directory
+  tags:
+    - logstash
+    - elk
+- name: Logstash Configuration Files
+  template: 
+    src: logstash.yml.j2 
+    dest: "{{project_directory}}/elasticsearch/logstash/logstash.yml"
+  notify: restart logstash
+  tags:
+    - logstash
+    - elk
+
+- name: Pipeline Configuration Files
+  template: 
+    src: logstash.conf.j2 
+    dest: "{{project_directory}}/elasticsearch/logstash/pipeline/logstash.conf"
+  notify: restart logstash
+  tags:
+    - logstash
+    - elk
+
+- name: Create Logstash Docker Container
+  docker_container:
+    name: logstash
+    hostname: logstash
+    image: "docker.elastic.co/logstash/logstash:{{elk_stack_version}}"
+    pull: yes
+    restart_policy: unless-stopped
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    state: started
+    volumes:
+      - "{{project_directory}}/elasticsearch/logstash:/config-dir"
+      - "{{project_directory}}/elasticsearch/logstash/pipeline:/usr/share/logstash/pipeline"
+  tags:
+    - logstash
+    - elk
+
+- name: Create Elasticsearch volume
+  docker_volume:
+    name: elasticsearch
+    state: present
+  notify: restart elasticsearch
+  tags:
+    - elasticsearch
+    - elk
+
+- name: Create Elasticsearch Directory
+  file:
+    path: "{{project_directory}}/elasticsearch"
+    state: directory
+  tags:
+    - elasticsearch
+    - elk
+
+- name: Elasticsearch Configuration Files
+  template: 
+    src: elasticsearch.yml.j2 
+    dest: "{{project_directory}}/elasticsearch/elasticsearch.yml"
+  notify: restart elasticsearch
+  tags:
+    - elasticsearch
+    - elk
+
+- name: Create Elasticsearch Docker Container
+  docker_container:
+    name: elasticsearch
+    hostname: elasticsearch
+    image: "docker.elastic.co/elasticsearch/elasticsearch:{{elk_stack_version}}"
+    pull: yes
+    restart_policy: unless-stopped
+    env:
+      ES_JAVA_OPTS: "-Xmx512m -Xms512m"
+      ELASTIC_PASSWORD: "{{elasticsearch_password}}"
+      discovery.type: "single-node"
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    state: started
+    volumes:
+      - "{{project_directory}}/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml"
+      - elasticsearch:/usr/share/elasticsearch/data
+  tags:
+    - elasticsearch
+    - elk
+
+- name: Create Kibana Directory
+  file:
+    path: "{{project_directory}}/elasticsearch/kibana"
+    state: directory
+  tags:
+    - kibana
+    - elk
+
+- name: Kibana Configuration Files
+  template: 
+    src: kibana.yml.j2 
+    dest: "{{project_directory}}/elasticsearch/kibana/kibana.yml"
+  notify: restart kibana
+  tags:
+    - kibana
+    - elk
+
+- name: Create Kibana Docker Container
+  docker_container:
+    name: kibana
+    hostname: kibana
+    image: "docker.elastic.co/kibana/kibana:{{elk_stack_version}}"
+    pull: yes
+    restart_policy: unless-stopped
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    state: started
+    volumes:
+      - "{{project_directory}}/elasticsearch/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml"
+    env:
+      SERVER_NAME: "{{kibana_hostname}}"
+      ELASTICSEARCH_HOSTS: "{{elastic_hostname}}"
+      ES_JAVA_OPTS: "-Xmx512m -Xms512m"
+    labels:
+      traefik.http.routers.kibana.entrypoints: "websecure"
+      traefik.http.routers.kibana.tls: "true"
+      traefik.http.routers.kibana.rule: "Host(`kibana.{{project_tld}}`)"
+      traefik.http.routers.kibana.middlewares: "default-headers@file"
+      traefik.http.routers.kibana.service: "kibana"
+      traefik.http.services.kibana.loadbalancer.server.port: "5601"
+      traefik.enable: "true"
+  tags:
+    - kibana
+    - elk

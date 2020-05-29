@@ -1,0 +1,7 @@
+---
+subspace_http_address: ""
+subspace_nameserver: ""
+subspace_ipv4_pool: ""
+subspace_ipv6_pool: ""
+subspace_ipv4_gw: ""
+subspace_ipv6_gw: ""

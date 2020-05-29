@@ -1,0 +1,35 @@
+---
+- name: Create VS Code Directories
+  file:
+    path: "{{project_directory}}/vscode"
+    state: directory
+  tags: vscode
+
+- name: Create VS Code Docker Container
+  docker_container:
+    name: vscode
+    image: "{{registry_host}}/{{registry_username}}/docker-vscode:{{vscode_version}}"
+    pull: yes
+    restart_policy: unless-stopped
+    comparisons:
+      labels: allow_more_present
+      '*': strict
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    state: started
+    env:
+      TZ: "{{default_timezone}}"
+      PASSWORD: "{{vscode_password}}"
+      SUDO_PASSWORD: "{{vscode_sudo_password}}"
+    volumes:
+      - "{{project_directory}}/vscode:/config"
+    labels:
+      traefik.http.routers.vscode.entrypoints: "websecure"
+      traefik.http.routers.vscode.tls: "true"
+      traefik.http.routers.vscode.rule: "Host(`ide.{{git_tld}}`)"
+      traefik.http.routers.vscode.middlewares: "default-headers@file"
+      traefik.http.routers.vscode.service: "vscode"
+      traefik.http.services.vscode.loadbalancer.server.port: "8443"
+      traefik.enable: "true"
+  tags: vscode

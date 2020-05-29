@@ -1,0 +1,28 @@
+---
+- name: Create Ouroboros Docker Container
+  docker_container:
+    name: ouroboros
+    hostname: ouroboros
+    user: root
+    privileged: yes
+    image: "pyouroboros/ouroboros:{{ouroboros_version}}"
+    pull: yes
+    comparisons:
+      '*': strict
+    restart_policy: unless-stopped
+    env:
+      CLEANUP: "true"
+      INTERVAL: "30"
+      LOG_LEVEL: "info"
+      SELF_UPDATE: "true"
+      TZ: ""
+      DATA_EXPORT: "prometheus"
+      PROMETHEUS_ADDR: "0.0.0.0"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    state: started
+  tags:
+    - ouroboros

@@ -1,0 +1,5 @@
+---
+elasticsearch_user: "elastic"
+elasticsearch_password: ""
+elastic_hostname: "http://elasticsearch:9200"
+kibana_hostname: "http://kibana:5601"

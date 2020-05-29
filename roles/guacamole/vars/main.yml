@@ -1,0 +1,4 @@
+---
+guacamole_database_user: "guacamole"
+guacamole_database_password: ""
+guacamole_database: "guacamole"

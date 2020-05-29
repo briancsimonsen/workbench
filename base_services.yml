@@ -1,0 +1,17 @@
+---
+- name: Deploy Base Services
+  hosts: servers
+  gather_facts: False
+  become: yes
+  roles:
+    - tecnativa
+    - traefik
+    - redis
+    - postgres
+    - mongodb
+    - gitlab
+    - drone
+    - elasticsearch
+    - netbootxyz
+    - raneto
+    - homer

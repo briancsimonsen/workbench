@@ -1,0 +1,8 @@
+---
+matrix_turn_secret: ""
+matrix_registration_shared_secret: ""
+matrix_macaroon_secret_key: ""
+matrix_form_secret: ""
+matrix_database_user: "synapse"
+matrix_database_password: ""
+matrix_database: "synapse"

@@ -1,0 +1,6 @@
+---
+    - name: Restart Matrix
+      docker_container:
+        name: synapse
+        restart: yes
+      listen: restart matrix

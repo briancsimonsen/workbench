@@ -1,0 +1,4 @@
+---
+firefly_database_user: "firefly"
+firefly_database_password: ""
+firefly_database: "firefly"

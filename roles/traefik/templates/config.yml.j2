@@ -1,0 +1,64 @@
+http:
+  middlewares:
+    default-headers:
+      headers:
+        referrerPolicy: no-referrer
+        forceSTSHeader: true
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        contentTypeNosniff: true
+        browserXssFilter: true
+        customRequestHeaders:
+          X-Forwarded-Proto: https
+    keycloak:
+      forwardAuth:
+        address: "http://traefik-auth:4181"
+        authResponseHeaders:
+          - "X-Forwarded-User"
+    traefik-auth:
+      basicAuth:
+        users:
+          - ""
+    tdarr-auth:
+      basicAuth:
+        users:
+          - ""
+  routers:
+    cups:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`print.{{project_tld}}`)"
+      tls: {}
+      middlewares:
+        - default-headers@file
+      service: "cups"
+    homeassistant:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`hass.{{project_tld}}`)"
+      tls: {}
+      middlewares:
+        - default-headers@file
+      service: "homeassistant"
+  services:
+    cups:
+      loadBalancer:
+        servers:
+          - url: ""
+    homeassistant:
+      loadBalancer:
+        servers:
+          - url: ""
+tls:
+  options:
+    default:
+      minVersion: VersionTLS12
+      sniStrict : true
+      cipherSuites:
+        - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+        - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+        - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+        - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+        - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
+        - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305

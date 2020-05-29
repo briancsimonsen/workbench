@@ -1,0 +1,12 @@
+[servers]
+blacktalon ansible_host=
+    
+[servers:vars]
+default_timezone=
+project_tld=
+chat_tld=
+kutt_tld=
+git_tld=
+jellyfin_tld=
+postgres_host=
+postgres_port=5432

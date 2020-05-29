@@ -1,0 +1,3 @@
+---
+mongo_initdb_root_username: "mongo"
+mongo_initdb_root_password: ""

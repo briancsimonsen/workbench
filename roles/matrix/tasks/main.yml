@@ -1,0 +1,73 @@
+---
+- name: Create Matrix Directory
+  file:
+    path: "{{project_directory}}/synapse"
+    state: directory
+  tags: matrix
+
+- import_tasks: roles/postgres/tasks/database_manager.yml
+  vars:
+    database_name: "{{matrix_database}}"
+    database_user: "{{matrix_database_user}}"
+    database_password: "{{matrix_database_password}}"
+  tags: matrix
+
+- name: Matrix Configuration Files
+  template: 
+    src: homeserver.yaml.j2 
+    dest: "{{project_directory}}/synapse/homeserver.yaml"
+  tags: matrix
+  notify: restart matrix
+
+- name: Create Matrix Docker Container
+  docker_container:
+    name: synapse
+    image: "docker.io/matrixdotorg/synapse:{{matrix_version}}"
+    pull: yes
+    restart_policy: unless-stopped
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    state: started
+    env:
+      SYNAPSE_CONFIG_PATH: /etc/homeserver.yaml
+    volumes:
+      - "{{project_directory}}/synapse/:/etc"
+      - "{{project_directory}}/synapse/data:/data:rw"
+    labels:
+      traefik.http.routers.synapse.entrypoints: "websecure"
+      traefik.http.routers.synapse.tls: "true"
+      traefik.http.routers.synapse.rule: "Host(`{{chat_tld}}`)"
+      traefik.http.routers.synapse.service: "synapse"
+      traefik.http.services.synapse.loadbalancer.server.port: "8008"
+      traefik.tcp.routers.matrix.entrypoints: "synapse"
+      traefik.tcp.routers.matrix.tls: "true"
+      traefik.tcp.routers.matrix.rule: "HostSNI(`{{chat_tld}}`)"
+      traefik.tcp.routers.matrix.tls.passthrough: "true"
+      traefik.tcp.routers.matrix.service: "torrent"
+      traefik.tcp.services.matrix.loadbalancer.server.port: "8443"
+      traefik.enable: "true"
+  tags: matrix
+
+- name: Create Matrix IRC Bridge Directory
+  file:
+    path: "{{project_directory}}/synapse/irc-bridge"
+    state: directory
+  tags: 
+    - irc
+    - matrix
+
+- name: Create Matrix IRC Bridge Docker Container
+  docker_container:
+    name: irc-bridge
+    image: "matrixdotorg/matrix-appservice-irc:{{irc_bridge_version}}"
+    restart_policy: unless-stopped
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    state: started
+    volumes:
+      - "{{project_directory}}/synapse/irc-bridge:/irc-config.yaml"
+  tags: 
+    - irc
+    - matrix

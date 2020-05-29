@@ -1,0 +1,38 @@
+---
+- name: Create Raneto Directory
+  file:
+    path: "{{project_directory}}/raneto"
+    state: directory
+  tags: raneto
+
+- name: Raneto Configuration Files
+  template:
+    src: config.default.js.j2 
+    dest: "{{project_directory}}/raneto/config.default.js"
+  tags: raneto
+
+- name: Create Raneto Docker Container
+  docker_container:
+    name: raneto
+    image: "{{registry_host}}/{{registry_username}}/docker-raneto:{{raneto_version}}"
+    pull: yes
+    restart_policy: unless-stopped
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    state: started
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "{{default_timezone}}"
+    volumes:
+      - "{{project_directory}}/raneto:/config"
+    labels:
+      traefik.http.routers.raneto.entrypoints: "websecure"
+      traefik.http.routers.raneto.tls: "true"
+      traefik.http.routers.raneto.rule: "Host(`wiki.{{project_tld}}`)"
+      traefik.http.routers.raneto.middlewares: "default-headers@file"
+      traefik.http.routers.raneto.service: "raneto"
+      traefik.http.services.raneto.loadbalancer.server.port: "3000"
+      traefik.enable: "true"
+  tags: raneto

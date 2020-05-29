@@ -1,0 +1,17 @@
+---
+- name: Deploy Media Services
+  hosts: servers
+  gather_facts: False
+  become: yes
+  roles:
+    - jackett
+    - hydra
+    - qbittorrent
+    - sabnzbd
+    - airsonic
+    - tdarr
+    - lidarr
+    - radarr
+    - sonarr
+    - bazarr
+    - jellyfin

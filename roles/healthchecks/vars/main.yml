@@ -1,0 +1,5 @@
+---
+healthchecks_superuser_email: ""
+healthchecks_superuser_password: ""
+healthchecks_matrix_user: "healthchecks"
+healthchecks_matrix_access_token: ""

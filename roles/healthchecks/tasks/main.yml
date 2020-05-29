@@ -1,0 +1,44 @@
+---
+- name: Create Healthchecks Directory
+  file:
+    path: "{{project_directory}}/healthchecks"
+    state: directory
+  tags: healthchecks
+
+- name: Create Healthchecks Docker Container
+  docker_container:
+    name: healthchecks
+    image: "{{registry_host}}/{{registry_username}}/docker-healthchecks:{{healthchecks_version}}"
+    pull: yes
+    restart_policy: unless-stopped
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    state: started
+    env:
+      SITE_ROOT: "status.{{project_tld}}"
+      SITE_NAME: "Status"
+      DEFAULT_FROM_EMAIL: "{{email_user}}"
+      EMAIL_HOST: "{{email_host}}"
+      EMAIL_PORT: "{{email_port}}"
+      EMAIL_HOST_USER: "{{email_user}}"
+      EMAIL_HOST_PASSWORD: "{{email_password}}"
+      EMAIL_USE_TLS: "True"
+      ALLOWED_HOSTS: "*"
+      SUPERUSER_EMAIL: "{{healthchecks_superuser_email}}"
+      SUPERUSER_PASSWORD: "{{healthchecks_superuser_password}}"
+      MATRIX_HOMESERVER: "{{matrix_notification_host}}"
+      MATRIX_USER_ID: "{{healthchecks_matrix_user}}"
+      MATRIX_ACCESS_TOKEN: "{{healthchecks_matrix_access_token}}"
+    volumes:
+      - "{{project_directory}}/healthchecks:/config"
+    labels:
+      traefik.http.routers.healthchecks.entrypoints: "websecure"
+      traefik.http.routers.healthchecks.tls: "true"
+      traefik.http.routers.healthchecks.rule: "Host(`status.{{project_tld}}`)"
+      traefik.http.middlewares.referheader.headers.referrerpolicy: "origin"
+      traefik.http.routers.healthchecks.middlewares: "default-headers@file,referheader"
+      traefik.http.routers.healthchecks.service: "healthchecks"
+      traefik.http.services.healthchecks.loadbalancer.server.port: "8000"
+      traefik.enable: "true"
+  tags: healthchecks

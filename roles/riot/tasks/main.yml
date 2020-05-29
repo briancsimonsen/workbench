@@ -1,0 +1,39 @@
+---
+- name: Create Riot Directory
+  file:
+    path: "{{project_directory}}/riot"
+    state: directory
+    owner: "8675309"
+    group: "8675309"
+  tags: riot
+
+- name: Riot Configuration Files
+  template: 
+    src: config.json.j2 
+    dest: "{{project_directory}}/riot/config.json"
+
+- name: Create Riot Docker Container
+  docker_container:
+    name: riot
+    image: "bubuntux/riot-web:{{riot_version}}"
+    pull: yes
+    restart_policy: unless-stopped
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    state: started
+    env:
+      PUID: "8675309"
+      PGID: "8675309"
+      TZ: "{{default_timezone}}"
+    volumes:
+      - "{{project_directory}}/riot/config.json:/etc/riot-web/config.json:ro"
+    labels:
+      traefik.http.routers.riot.entrypoints: "websecure"
+      traefik.http.routers.riot.tls: "true"
+      traefik.http.routers.riot.rule: "Host(`riot.{{chat_tld}}`)"
+      traefik.http.routers.riot.middlewares: "default-headers@file"
+      traefik.http.routers.riot.service: "riot"
+      traefik.http.services.riot.loadbalancer.server.port: "80"
+      traefik.enable: "true"
+  tags: riot

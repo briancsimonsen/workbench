@@ -1,0 +1,49 @@
+---
+- name: Create Subspace Directory
+  file:
+    path: "{{project_directory}}/subspace"
+    state: directory
+  tags: subspace
+
+- name: Create Subspace Docker Container
+  docker_container:
+    name: subspace
+    hostname: subspace
+    user: "root"
+    image: "{{registry_host}}/{{registry_username}}/docker-subspace:{{subspace_version}}"
+    pull: yes
+    restart_policy: unless-stopped
+    network_mode: host
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    purge_networks: yes
+    capabilities:
+      - NET_ADMIN
+    state: started
+    env:
+      SUBSPACE_HTTP_HOST: "vpn.{{project_tld}}"
+      SUBSPACE_LETSENCRYPT: "false"
+      SUBSPACE_HTTP_INSECURE: "true"
+      SUBSPACE_HTTP_ADDR: "{{subspace_http_address}}"
+      SUBSPACE_NAMESERVER: "{{subspace_nameserver}}"
+      SUBSPACE_LISTENPORT: "51820"
+      SUBSPACE_IPV4_POOL: "{{subspace_ipv4_pool}}"
+      SUBSPACE_IPV6_POOL: "{{subspace_ipv6_pool}}"
+      SUBSPACE_IPV4_GW: "{{subspace_ipv4_gw}}"
+      SUBSPACE_IPV6_GW: "{{subspace_ipv6_gw}}"
+      SUBSPACE_IPV6_NAT_ENABLED: "0"
+    volumes:
+      - "{{project_directory}}/subspace:/data"
+      - /usr/bin/wg:/usr/bin/wg
+    labels:
+      traefik.http.routers.subspace.entrypoints: "websecure"
+      traefik.http.routers.subspace.tls: "true"
+      traefik.http.routers.subspace.rule: "Host(`vpn.{{project_tld}}`)"
+      traefik.http.routers.subspace.service: "subspace"
+      traefik.http.services.subspace.loadbalancer.server.port: "80"
+      traefik.utp.routers.wireguard.entrypoints: "wireguard"
+      traefik.utp.routers.wireguard.service: "wireguard"
+      traefik.utp.services.wireguard.loadbalancer.server.port: "51820"
+      traefik.enable: "true"
+  tags: subspace

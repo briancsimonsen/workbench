@@ -1,0 +1,7 @@
+---
+    - name: Restart AllTube
+      docker_container:
+        name: alltube
+        restart: yes
+      listen: restart alltube
+    

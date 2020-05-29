@@ -1,0 +1,5 @@
+---
+airsonic_jwtkey: ""
+airsonic_smtp_password: ""
+airsonic_recaptcha_sitekey: ""
+airsonic_welcome_title: "Something Music"

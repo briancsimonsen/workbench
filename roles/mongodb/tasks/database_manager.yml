@@ -1,0 +1,7 @@
+---
+- name: Ensure MondoDB Databases are Present.
+  mongodb_user:
+    database: "{{database_name}}"
+    name: "{{database_user}}"
+    password: "{{database_password}}"
+    state: present

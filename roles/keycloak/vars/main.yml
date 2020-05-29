@@ -1,0 +1,6 @@
+---
+keycloak_database: "keycloak"
+keycloak_database_user: "keycloak"
+keycloak_database_password: ""
+keycloak_user: ""
+keycloak_user_password: ""

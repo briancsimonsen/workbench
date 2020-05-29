@@ -1,0 +1,5 @@
+---
+gitlab_database_user: "gitlab"
+gitlab_database_password: ""
+gitlab_database: "gitlab"
+gitlab_runner_registration_token: ""

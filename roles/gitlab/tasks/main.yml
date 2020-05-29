@@ -1,0 +1,95 @@
+---
+- name: Create Gitlab Directory
+  file:
+    path: "{{project_directory}}/gitlab"
+    state: directory
+  tags: gitlab
+
+- import_tasks: roles/postgres/tasks/database_manager.yml
+  vars:
+    database_name: "{{gitlab_database}}"
+    database_user: "{{gitlab_database_user}}"
+    database_password: "{{gitlab_database_password}}"
+  tags: gitlab
+
+- name: Adds Extensions to the Gitlab Database
+  postgresql_ext:
+    name: pg_trgm
+    db: gitlab
+    login_host: "{{postgres_host}}"
+    login_port: "{{postgres_port}}"
+    login_password: "{{postgres_root_password}}"
+    cascade: true
+  tags: gitlab
+
+- name: Create Gitlab Docker Container
+  docker_container:
+    name: gitlab
+    user: root
+    privileged: yes
+    image: "gitlab/gitlab-ce:{{gitlab_version}}"
+    pull: yes
+    restart_policy: unless-stopped
+    healthcheck:
+      retries: 5
+      test: ["CMD-SHELL", "/opt/gitlab/bin/gitlab-healthcheck --fail --max-time 10"]
+    published_ports:
+      - "2222:22"
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    state: started
+    volumes:
+      - "{{project_directory}}/gitlab/config:/etc/gitlab"
+      - "{{project_directory}}/gitlab/logs:/var/log/gitlab"
+      - "{{project_directory}}/gitlab/data:/var/opt/gitlab"
+    labels:
+      traefik.http.routers.gitlab.entrypoints: "websecure"
+      traefik.http.routers.gitlab.tls: "true"
+      traefik.http.routers.gitlab.rule: "Host(`{{git_tld}}`)"
+      traefik.http.routers.gitlab.service: "gitlab"
+      traefik.http.services.gitlab.loadbalancer.server.port: "80"
+      traefik.http.routers.registry.entrypoints: "websecure"
+      traefik.http.routers.registry.tls: "true"
+      traefik.http.routers.registry.rule: "Host(`hub.{{git_tld}}`)"
+      traefik.http.routers.registry.service: "registry"
+      traefik.http.services.registry.loadbalancer.server.port: "5050"
+      traefik.tcp.routers.registry.entrypoints: "docker"
+      traefik.tcp.routers.registry.rule: "HostSNI(`hub.{{git_tld}}`)"
+      traefik.tcp.routers.registry.service: "registry"
+      traefik.tcp.services.registry.loadbalancer.server.port: "5005"
+      traefik.enable: "true"
+  tags: gitlab
+
+- name: Create Gitlab Runner Directory
+  file:
+    path: "{{project_directory}}/gitlab/runner"
+    state: directory
+  tags: gitlab
+
+- name: Create Gitlab Runner Docker Container
+  docker_container:
+    name: gitlab-runner
+    image: "gitlab/gitlab-runner:{{gitlab_version}}"
+    pull: yes
+    restart_policy: unless-stopped
+    volumes:
+      - "{{project_directory}}/gitlab/runner:/etc/gitlab-runner"
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    state: started
+  tags: gitlab
+
+- name: Wait for Gitlab to accept connections
+  wait_for:
+    host: "{{git_tld}}"
+    port: "443"
+    state: drained
+    connect_timeout: 1
+    timeout: 100
+  register: gitlab_running
+  until: gitlab_running is success
+  retries: 10
+  tags: gitlab

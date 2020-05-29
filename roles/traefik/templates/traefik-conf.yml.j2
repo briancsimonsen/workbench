@@ -1,0 +1,57 @@
+---
+api:
+  dashboard: true
+  debug: false
+
+serversTransport:
+  insecureSkipVerify: true
+
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+  prometheus:
+    address: ":8082"
+  docker:
+    address: ":5005"
+  synapse:
+    address: ":8443"
+  torrent:
+    address: ":6881"
+  bittorrent:
+    address: ":6881/udp"
+  wireguard:
+    address: ":51820/udp"
+  netboot:
+    address: ":69/udp"
+
+providers:
+  docker:
+    endpoint: "tcp://tecnativa:2375"
+    exposedByDefault: false
+    watch: true
+    network: proxy
+  file:
+    filename: /config.yml
+    watch: true
+
+certificatesResolvers:
+  dnsChallenge:
+    acme:
+      email: 
+      storage: acme.json
+      dnsChallenge:
+        provider: digitalocean
+        delayBeforeCheck: 0
+
+metrics:
+  prometheus:
+    buckets:
+      - 0.1
+      - 0.3
+      - 1.2
+      - 5.0
+    addEntryPointsLabels: true
+    addServicesLabels: true
+    entryPoint: prometheus

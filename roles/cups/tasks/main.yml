@@ -1,0 +1,27 @@
+---
+- name: Create cups Directory
+  file:
+    path: "{{project_directory}}/cups"
+    state: directory
+  tags: cups
+
+- name: cups Configuration Files
+  template: 
+    src: cupsd.conf.j2 
+    dest: "/etc/cups/cupsd.conf"
+  notify: restart cups
+  tags: cups
+
+- name: Create cups Docker Container
+  docker_container:
+    name: cups
+    image: "{{registry_host}}/{{registry_username}}/docker-cups:{{cups_version}}"
+    pull: yes
+    restart_policy: unless-stopped
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    state: started
+    volumes:
+      - "{{project_directory}}/cups:/data"
+  tags: cups

@@ -1,0 +1,12 @@
+---
+- name: Restart Keycloak
+  docker_container:
+    name: keycloak
+    restart: yes
+  listen: restart keycloak
+
+- name: Restart Keycloak Gatekeeper
+  docker_container:
+    name: gatekeeper
+    restart: yes
+  listen: restart gatekeeper

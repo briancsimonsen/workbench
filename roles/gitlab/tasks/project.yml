@@ -1,0 +1,9 @@
+---
+- name: Create GitLab Project
+  gitlab_project:
+    api_url: "https://{{git_tld}}/"
+    api_username: "XXXXXXXXXX"
+    api_password: "{{gitlab_access_token}}"
+    name: "{{project_name}}"
+    visibility: internal
+    state: present

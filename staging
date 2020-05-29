@@ -1,0 +1,14 @@
+[servers]
+yellowtallon ansible_host=
+
+[servers:vars]
+ansible_python_interpreter=/usr/bin/python3
+project_directory=
+media_directory=
+default_timezone=
+project_tld=
+chat_tld=
+git_tld=
+jellyfin_tld=
+postgres_host=
+postgres_port=5432

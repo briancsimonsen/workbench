@@ -1,0 +1,6 @@
+---
+- name: Restart Firefly
+  docker_container:
+    name: firefly
+    restart: yes
+  listen: restart firefly

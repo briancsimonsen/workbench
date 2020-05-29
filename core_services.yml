@@ -1,0 +1,24 @@
+---
+- name: Deploy Core Services
+  hosts: servers
+  gather_facts: False
+  become: yes
+  roles:
+    - alltube
+    - bitwarden
+    - cyberchef
+    - firefly
+    - freshrss
+    - grafana
+    - guacamole
+    - healthchecks
+    - keycloak
+    - kutt
+    - matrix
+    - minio
+    - pyload
+    - riot
+    - teedy
+    - vscode
+    - wallabag
+    - webdav

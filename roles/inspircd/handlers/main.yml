@@ -1,0 +1,6 @@
+---
+- name: Restart InspIRCd
+  docker_container:
+    name: inspircd
+    restart: yes
+  listen: restart inspircd

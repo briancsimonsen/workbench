@@ -1,0 +1,6 @@
+---
+drone_gitlab_client_id: ""
+drone_gitlab_client_secret: ""
+drone_server_proto: "http"
+drone_cookie_secret: ""
+drone_cookie_timeout: "72h"

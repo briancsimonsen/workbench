@@ -1,0 +1,44 @@
+---
+- name: Create Bazarr Directory
+  file:
+    path: "{{project_directory}}/bazarr"
+    state: directory
+  tags: bazarr
+
+- name: Bazarr Configuration Files
+  template: 
+    src: config.ini.j2 
+    dest: "{{project_directory}}/bazarr/config/config.ini"
+  notify: restart bazarr
+  tags: bazarr
+
+- name: Create Bazarr Docker Container
+  docker_container:
+    name: bazarr
+    image: "{{registry_host}}/{{registry_username}}/docker-bazarr:{{bazarr_version}}"
+    pull: yes
+    restart_policy: unless-stopped
+    comparisons:
+      labels: allow_more_present
+      '*': strict
+    networks:
+      - name: proxy
+    networks_cli_compatible: yes
+    state: started
+    env:
+      PUID: "{{media_user}}"
+      PGID: "{{media_group}}"
+      TZ: "{{default_timezone}}"
+    volumes:
+      - "{{project_directory}}/bazarr:/config"
+      - "{{media_directory}}/movies:/media/movies"
+      - "{{media_directory}}/tv:/media/tv"
+    labels:
+      traefik.http.routers.bazarr.entrypoints: "websecure"
+      traefik.http.routers.bazarr.tls: "true"
+      traefik.http.routers.bazarr.rule: "Host(`bazarr.{{project_tld}}`)"
+      traefik.http.routers.bazarr.middlewares: "default-headers@file"
+      traefik.http.routers.bazarr.service: "bazarr"
+      traefik.http.services.bazarr.loadbalancer.server.port: "6767"
+      traefik.enable: "true"
+  tags: bazarr
