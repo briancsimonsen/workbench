@@ -15,7 +15,7 @@
   tags: traefik
 
 - name: Teaefik Configuration
-  template: 
+  template:
     src: "{{item.src}}"
     dest: "{{item.dest}}"
   with_items:

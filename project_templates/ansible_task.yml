@@ -42,8 +42,8 @@
   tags: SERVICE_NAME
 
 - name: SERVICE_NAME Configuration Files
-  template: 
-    src: config.json.j2 
+  template:
+    src: config.json.j2
     dest: "{{project_directory}}/SERVICE_NAME/config.json"
   notify: restart SERVICE_NAME
   tags: SERVICE_NAME

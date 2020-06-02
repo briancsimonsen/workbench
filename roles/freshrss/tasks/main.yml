@@ -46,8 +46,8 @@
   tags: freshrss
 
 - name: RSS-Bridge Configuration File
-  template: 
-    src: whitelist.txt.j2 
+  template:
+    src: whitelist.txt.j2
     dest: "{{project_directory}}/rssbridge/whitelist.txt"
   tags: freshrss
   notify: restart rssbridge

@@ -13,8 +13,8 @@
   tags: matrix
 
 - name: Matrix Configuration Files
-  template: 
-    src: homeserver.yaml.j2 
+  template:
+    src: homeserver.yaml.j2
     dest: "{{project_directory}}/synapse/homeserver.yaml"
   tags: matrix
   notify: restart matrix
@@ -53,7 +53,7 @@
   file:
     path: "{{project_directory}}/synapse/irc-bridge"
     state: directory
-  tags: 
+  tags:
     - irc
     - matrix
 
@@ -68,6 +68,6 @@
     state: started
     volumes:
       - "{{project_directory}}/synapse/irc-bridge:/irc-config.yaml"
-  tags: 
+  tags:
     - irc
     - matrix

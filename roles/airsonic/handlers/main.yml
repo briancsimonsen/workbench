@@ -3,5 +3,4 @@
       docker_container:
         name: airsonic
         restart: yes
-      listen: restart airsonic 
-      
+      listen: restart airsonic

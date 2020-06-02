@@ -42,8 +42,8 @@
     - grafana
 
 - name: Alert Manager Configuration Files
-  template: 
-    src: alertmanager.yml.j2 
+  template:
+    src: alertmanager.yml.j2
     dest: "{{project_directory}}/grafana/alertmanager/config.yml"
   notify: restart alertmanager
   tags:
@@ -103,8 +103,8 @@
     - grafana
 
 - name: Prometheus Configuration Files
-  template: 
-    src: prometheus.yml.j2 
+  template:
+    src: prometheus.yml.j2
     dest: "{{project_directory}}/grafana/prometheus/prometheus.yml"
   notify: restart prometheus
   tags:

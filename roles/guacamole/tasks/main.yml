@@ -9,7 +9,7 @@
       - name: proxy
     networks_cli_compatible: yes
     state: started
-  tags: 
+  tags:
     - guacd
     - guacamole
 

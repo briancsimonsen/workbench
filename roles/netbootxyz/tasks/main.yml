@@ -12,7 +12,7 @@
     system: yes
     uid: 1040
     group: netboot
-    groups: 
+    groups:
       - docker
 
 - name: Create NetBootxyz Directory

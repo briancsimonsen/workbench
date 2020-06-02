@@ -7,7 +7,7 @@
 
 - name: Raneto Configuration Files
   template:
-    src: config.default.js.j2 
+    src: config.default.js.j2
     dest: "{{project_directory}}/raneto/config.default.js"
   tags: raneto
 

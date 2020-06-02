@@ -40,7 +40,7 @@
   file:
     path: "{{project_directory}}/freeipa"
     state: directory
-  tags: 
+  tags:
     - freeipa
     - keycloak
 
@@ -63,6 +63,6 @@
       traefik.http.routers.freeipa.service: "freeipa"
       traefik.http.services.freeipa.loadbalancer.server.port: "8080"
       traefik.enable: "true"
-  tags: 
+  tags:
     - freeipa
     - keycloak

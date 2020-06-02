@@ -6,8 +6,8 @@
   tags: airsonic
 
 - name: Airsonic Configuration File
-  template: 
-    src: airsonic.properties.j2 
+  template:
+    src: airsonic.properties.j2
     dest: "{{project_directory}}/airsonic/airsonic.properties"
   tags: airsonic
   notify: restart airsonic

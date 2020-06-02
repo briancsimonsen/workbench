@@ -16,7 +16,7 @@
     name: elasticsearch
     restart: yes
   listen: restart elasticsearch
-  
+
 - name: Restart Kibana
   docker_container:
     name: kibana

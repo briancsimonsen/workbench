@@ -8,8 +8,8 @@
   tags: qbittorrent
 
 - name: qBittorrent Configuration Files
-  template: 
-    src: qBittorrent.conf.j2 
+  template:
+    src: qBittorrent.conf.j2
     dest: "{{project_directory}}/qbittorrent/qBittorrent.conf"
   tags: qbittorrent
   notify: restart qbittorrent

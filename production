@@ -1,6 +1,6 @@
 [servers]
 blacktalon ansible_host=
-    
+
 [servers:vars]
 default_timezone=
 project_tld=

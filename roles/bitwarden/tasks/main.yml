@@ -8,8 +8,8 @@
   tags: bitwarden
 
 - name: Bitwarden Configuration Files
-  template: 
-    src: config.json.j2 
+  template:
+    src: config.json.j2
     dest: "{{project_directory}}/bitwarden/config.json"
   notify: restart bitwarden
   tags: bitwarden

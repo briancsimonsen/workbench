@@ -6,8 +6,8 @@
   tags: bazarr
 
 - name: Bazarr Configuration Files
-  template: 
-    src: config.ini.j2 
+  template:
+    src: config.ini.j2
     dest: "{{project_directory}}/bazarr/config/config.ini"
   notify: restart bazarr
   tags: bazarr

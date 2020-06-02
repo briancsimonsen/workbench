@@ -6,8 +6,8 @@
   tags: lidarr
 
 - name: Lidarr Configuration Files
-  template: 
-    src: config.xml.j2 
+  template:
+    src: config.xml.j2
     dest: "{{project_directory}}/lidarr/config.xml"
   notify: restart lidarr
   tags: lidarr

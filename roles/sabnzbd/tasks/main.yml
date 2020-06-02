@@ -6,8 +6,8 @@
   tags: sabnzbd
 
 - name: Sabnzbd Configuration Files
-  template: 
-    src: sabnzbd.ini.j2 
+  template:
+    src: sabnzbd.ini.j2
     dest: "{{project_directory}}/sabnzbd/sabnzbd.ini"
   notify: restart sabnzbd
   tags: sabnzbd

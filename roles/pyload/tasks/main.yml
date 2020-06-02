@@ -6,8 +6,8 @@
   tags: pyload
 
 - name: Pyload Configuration Files
-  template: 
-    src: "pyload.conf.j2" 
+  template:
+    src: "pyload.conf.j2"
     dest: "{{project_directory}}/pyload/pyload.conf"
   tags: pyload
   notify: restart pyload

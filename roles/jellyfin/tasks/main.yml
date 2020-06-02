@@ -6,8 +6,8 @@
   tags: jellyfin
 
 - name: Jellyfin Configuration File
-  template: 
-    src: system.xml.j2 
+  template:
+    src: system.xml.j2
     dest: "{{project_directory}}/jellyfin/system.xml"
   tags: jellyfin
   notify: restart jellyfin

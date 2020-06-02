@@ -18,7 +18,7 @@
     image: "{{registry_host}}/{{registry_username}}/docker-wreeto:{{wreeto_version}}"
     pull: yes
     restart_policy: unless-stopped
-    command: "foreman start" 
+    command: "foreman start"
     networks:
       - name: proxy
     networks_cli_compatible: yes
@@ -37,7 +37,7 @@
       REDIS_PASSWORD: ""
       SMTP_USERNAME: "{{email_user}}"
       SMTP_PASSWORD: "{{email_password}}"
-      WREETO_HOST: "localhost" 
+      WREETO_HOST: "localhost"
       WREETO_PORT: "8383"
     volumes:
       - "{{project_directory}}/wreeto:/data"

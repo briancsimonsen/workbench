@@ -6,8 +6,8 @@
   tags: homer
 
 - name: Homer Configuration Files
-  template: 
-    src: config.yml.j2 
+  template:
+    src: config.yml.j2
     dest: "{{project_directory}}/homer/config.yml"
   tags: homer
   notify: restart homer

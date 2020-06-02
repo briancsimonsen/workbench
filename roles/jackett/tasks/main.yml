@@ -8,8 +8,8 @@
   tags: jackett
 
 - name: Jackett Configuration Files
-  template: 
-    src: ServerConfig.json.j2 
+  template:
+    src: ServerConfig.json.j2
     dest: "{{project_directory}}/jackett/Jackett/ServerConfig.json"
   notify: restart jackett
   tags: jackett

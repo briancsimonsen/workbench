@@ -13,8 +13,8 @@
   tags: firefly
 
 - name: Firefly Configuration Files
-  template: 
-    src: env.j2 
+  template:
+    src: env.j2
     dest: "{{project_directory}}/firefly//.env"
   tags: firefly
   notify: restart firefly
