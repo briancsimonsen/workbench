@@ -1,8 +1,8 @@
 ---
-matrix_turn_secret: ""
-matrix_registration_shared_secret: ""
-matrix_macaroon_secret_key: ""
-matrix_form_secret: ""
+matrix_turn_secret: "W9nPGwz9s26vUNHGtFzVY7NRCHvAK5Y7"
+matrix_registration_shared_secret: "N9GuYaYjqYU4TeYRqcyYGBcjFWWG2PD7"
+matrix_macaroon_secret_key: "Cy7qf4jxuAgMdqu32pf4hVHHg5QgcsPF"
+matrix_form_secret: "SctLFxqTUX97tcKnEiVeZtwRJf2Ub9ko"
 matrix_database_user: "synapse"
-matrix_database_password: ""
+matrix_database_password: "rrYzjCdccSXQ89NbwoGY2qmNCh8kfv7f"
 matrix_database: "synapse"

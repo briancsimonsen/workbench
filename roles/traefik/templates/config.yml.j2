@@ -16,40 +16,6 @@ http:
         address: "http://traefik-auth:4181"
         authResponseHeaders:
           - "X-Forwarded-User"
-    traefik-auth:
-      basicAuth:
-        users:
-          - ""
-    tdarr-auth:
-      basicAuth:
-        users:
-          - ""
-  routers:
-    cups:
-      entryPoints:
-        - "websecure"
-      rule: "Host(`print.{{project_tld}}`)"
-      tls: {}
-      middlewares:
-        - default-headers@file
-      service: "cups"
-    homeassistant:
-      entryPoints:
-        - "websecure"
-      rule: "Host(`hass.{{project_tld}}`)"
-      tls: {}
-      middlewares:
-        - default-headers@file
-      service: "homeassistant"
-  services:
-    cups:
-      loadBalancer:
-        servers:
-          - url: ""
-    homeassistant:
-      loadBalancer:
-        servers:
-          - url: ""
 tls:
   options:
     default:

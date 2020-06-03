@@ -6,6 +6,6 @@ RUN dnf -y update && dnf clean all
 
 RUN dnf -y install ansible python3-psycopg2 dnf-plugins-core && dnf clean all
 
-RUN echo 'ANSIBLE_VAULT_PASSWORD' >> /etc/ansible/vault_pass.txt
+RUN echo 'eNFeqsJLPJMEmVeWYF3EqiYvK6NZ77Dj' >> /etc/ansible/vault_pass.txt
 
 COPY ./ /workbench

@@ -1,5 +1,5 @@
 ---
 elasticsearch_user: "elastic"
-elasticsearch_password: ""
+elasticsearch_password: "o6ZFVMM7HHHbA97t9G4FtnxwJgRuxWYA"
 elastic_hostname: "http://elasticsearch:9200"
 kibana_hostname: "http://kibana:5601"

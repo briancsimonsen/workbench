@@ -1,8 +1,0 @@
----
-- name: Deploy Base Environment
-  hosts: servers
-  gather_facts: False
-  become: yes
-  roles:
-    - workbench
-    - docker

@@ -1,6 +1,6 @@
 ---
-grafana_user: ""
-grafana_user_password: ""
+grafana_user: "qimNpRpA"
+grafana_user_password: "CpVKW4uDQ2X5aAwNygFRsfX5TNWMzkoq"
 grafana_database_user: "grafana"
-grafana_database_password: ""
+grafana_database_password: "Yx28midhme4fvn5xuqZefNmz6oA5rvTk"
 grafana_database: "grafana"

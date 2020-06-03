@@ -1,6 +1,6 @@
 ---
 keycloak_database: "keycloak"
 keycloak_database_user: "keycloak"
-keycloak_database_password: ""
-keycloak_user: ""
-keycloak_user_password: ""
+keycloak_database_password: "3Z8ruNZYrpJqsHFVjxcEUcHGr4egDJvF"
+keycloak_user: "uk3ZqFi"
+keycloak_user_password: "xJBHnKdKXjUCtANoUWjTLXDFrRs9iBT7"

@@ -1,5 +1,5 @@
 ---
-healthchecks_superuser_email: ""
-healthchecks_superuser_password: ""
+healthchecks_superuser_email: "superuser@domain.com"
+healthchecks_superuser_password: "8httbFvich7Yi7HRGmUE6RDvGHwWUeD8"
 healthchecks_matrix_user: "healthchecks"
 healthchecks_matrix_access_token: ""

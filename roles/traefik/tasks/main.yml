@@ -86,32 +86,3 @@
       traefik.tcp.routers.wildcard.tls.domains[4].sans: "*.{{kutt_tld}}"
       traefik.enable: "true"
   tags: traefik
-
-- name: Create Teaefik Auth Docker Container
-  docker_container:
-    name: traefik-auth
-    image: "funkypenguin/traefik-forward-auth:{{traefik_auth_version}}"
-    pull: yes
-    comparisons:
-      labels: allow_more_present
-      '*': strict
-    restart_policy: unless-stopped
-    env:
-      CLIENT_ID: "traefik-auth"
-      CLIENT_SECRET: "{{traefik_client_secret}}"
-      OIDC_ISSUER: ""
-      SECRET: "{{traefik_auth_secret}}"
-      AUTH_HOST: "sso.{{project_tld}}"
-      COOKIE_DOMAINS: "{{project_tld}}"
-      LOG_LEVEL: "debug"
-    networks:
-      - name: proxy
-    networks_cli_compatible: yes
-    state: started
-    labels:
-      traefik.http.routers.traefik-auth.entrypoints: "websecure"
-      traefik.http.routers.traefik-auth.rule: "Host(`sso.{{project_tld}}`)"
-      traefik.http.routers.traefik-auth.tls: "true"
-      traefik.http.routers.traefik-auth.service: "traefik-auth"
-      traefik.http.services.traefik-auth.loadbalancer.server.port: "4181"
-      traefik.enable: "true"

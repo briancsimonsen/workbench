@@ -1,5 +1,5 @@
 ---
 gitlab_database_user: "gitlab"
-gitlab_database_password: ""
+gitlab_database_password: "9dKsGs8zbeQ2BPthdG8JjJNJ9EWuF6Q5"
 gitlab_database: "gitlab"
-gitlab_runner_registration_token: ""
+gitlab_runner_registration_token: "qd5L5YoVpq9DX4WNBzmfy5QhUXESwNRE"

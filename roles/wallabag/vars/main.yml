@@ -1,5 +1,5 @@
 ---
 wallabag_database_user: "wallabag"
-wallabag_database_password: ""
+wallabag_database_password: "d68yeTYYHksYTtLHR9E3GV6PVpf5R5jV"
 wallabag_database: "wallabag"
 wallabag_database_class: "Wallabag\\CoreBundle\\Doctrine\\DBAL\\Driver\\CustomPostgreSQLDriver"
