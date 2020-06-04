@@ -15,7 +15,7 @@
 - name: Create wreeto Docker Container
   docker_container:
     name: wreeto
-    image: "{{registry_host}}/{{registry_username}}/docker-wreeto:{{wreeto_version}}"
+    image: "chrisvel/wreeto:{{wreeto_version}}"
     pull: yes
     restart_policy: unless-stopped
     command: "foreman start"

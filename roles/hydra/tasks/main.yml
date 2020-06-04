@@ -10,7 +10,7 @@
 - name: Create Hydra Docker Container
   docker_container:
     name: hydra
-    image: "{{registry_host}}/{{registry_username}}/docker-hydra:{{hydra_version}}"
+    image: "linuxserver/nzbhydra2:{{hydra_version}}"
     pull: yes
     restart_policy: unless-stopped
     comparisons:

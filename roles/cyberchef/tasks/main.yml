@@ -2,7 +2,7 @@
 - name: Create CyberChef Docker Container
   docker_container:
     name: cyberchef
-    image: "{{registry_host}}/{{registry_username}}/docker-cyberchef:{{cyberchef_version}}"
+    image: "remnux/cyberchef:{{cyberchef_version}}"
     pull: yes
     restart_policy: unless-stopped
     privileged: yes

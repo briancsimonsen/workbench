@@ -15,7 +15,7 @@
 - name: Create Sabnzbd Docker Container
   docker_container:
     name: sabnzbd
-    image: "{{registry_host}}/{{registry_username}}/docker-sabnzbd:{{sabnzbd_version}}"
+    image: "linuxserver/sabnzbd:{{sabnzbd_version}}"
     pull: yes
     restart_policy: unless-stopped
     comparisons:

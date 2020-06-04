@@ -15,7 +15,7 @@
 - name: Create Homer Docker Container
   docker_container:
     name: homer
-    image: "{{registry_host}}/{{registry_username}}/docker-homer:{{homer_version}}"
+    image: "nx211/docker-homer:{{homer_version}}"
     pull: yes
     restart_policy: unless-stopped
     networks:

@@ -15,7 +15,7 @@
 - name: Create cups Docker Container
   docker_container:
     name: cups
-    image: "{{registry_host}}/{{registry_username}}/docker-cups:{{cups_version}}"
+    image: "ydkn/cups:{{cups_version}}"
     pull: yes
     restart_policy: unless-stopped
     networks:

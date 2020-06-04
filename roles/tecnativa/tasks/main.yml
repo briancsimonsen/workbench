@@ -2,7 +2,7 @@
 - name: Create Tecnativa Docker Container
   docker_container:
     name: tecnativa
-    image: "{{registry_host}}/{{registry_username}}/docker-tecnativa:{{tecnativa_version}}"
+    image: "tecnativa/docker-socket-proxy:{{tecnativa_version}}"
     pull: yes
     restart_policy: unless-stopped
     privileged: yes

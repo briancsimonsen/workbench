@@ -8,7 +8,7 @@
 - name: Create AllTube Docker Container
   docker_container:
     name: alltube
-    image: "{{registry_host}}/{{registry_username}}/docker-alltube:{{alltube_version}}"
+    image: "rudloff/alltube:{{alltube_version}}"
     pull: yes
     restart_policy: unless-stopped
     networks:

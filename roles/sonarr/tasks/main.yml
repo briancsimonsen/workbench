@@ -15,7 +15,7 @@
 - name: Create Sonarr Docker Container
   docker_container:
     name: sonarr
-    image: "{{registry_host}}/{{registry_username}}/docker-sonarr:{{sonarr_version}}"
+    image: "linuxserver/sonarr:{{sonarr_version}}"
     pull: yes
     restart_policy: unless-stopped
     comparisons:

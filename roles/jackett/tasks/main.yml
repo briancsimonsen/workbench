@@ -17,7 +17,7 @@
 - name: Create Jackett Docker Container
   docker_container:
     name: jackett
-    image: "{{registry_host}}/{{registry_username}}/docker-jackett:{{jackett_version}}"
+    image: "linuxserver/jackett:{{jackett_version}}"
     pull: yes
     restart_policy: unless-stopped
     comparisons:

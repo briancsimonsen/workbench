@@ -6,4 +6,3 @@
     password: "{{registry_password}}"
     reauthorize: yes
   register: registry_state
-  tags: always

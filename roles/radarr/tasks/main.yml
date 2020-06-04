@@ -15,7 +15,7 @@
 - name: Create Radarr Docker Container
   docker_container:
     name: radarr
-    image: "{{registry_host}}/{{registry_username}}/docker-radarr:{{radarr_version}}"
+    image: "linuxserver/radarr:{{radarr_version}}"
     pull: yes
     restart_policy: unless-stopped
     comparisons:

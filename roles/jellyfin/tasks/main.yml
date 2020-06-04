@@ -16,7 +16,7 @@
   docker_container:
     name: jellyfin
     hostname: jellyfin
-    image: "{{registry_host}}/{{registry_username}}/docker-jellyfin:{{jellyfin_version}}"
+    image: "linuxserver/jellyfin:{{jellyfin_version}}"
     pull: yes
     restart_policy: unless-stopped
     comparisons:

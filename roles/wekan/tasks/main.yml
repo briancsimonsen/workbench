@@ -15,7 +15,7 @@
 - name: Create Wekan Docker Container
   docker_container:
     name: wekan
-    image: "{{registry_host}}/{{registry_username}}/docker-wekan:{{wekan_version}}"
+    image: "wekanteam/wekan:{{wekan_version}}"
     pull: yes
     restart_policy: unless-stopped
     networks:

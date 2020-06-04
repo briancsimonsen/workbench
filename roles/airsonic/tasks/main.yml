@@ -15,7 +15,7 @@
 - name: Create Airsonic Docker Container
   docker_container:
     name: airsonic
-    image: "{{registry_host}}/{{registry_username}}/docker-airsonic:{{airsonic_version}}"
+    image: "linuxserver/airsonic:{{airsonic_version}}"
     pull: yes
     restart_policy: unless-stopped
     comparisons:

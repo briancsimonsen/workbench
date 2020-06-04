@@ -10,7 +10,7 @@
     name: subspace
     hostname: subspace
     user: "root"
-    image: "{{registry_host}}/{{registry_username}}/docker-subspace:{{subspace_version}}"
+    image: "subspacecloud/subspace:{{subspace_version}}"
     pull: yes
     restart_policy: unless-stopped
     network_mode: host

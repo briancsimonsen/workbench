@@ -14,7 +14,7 @@
 - name: Create Raneto Docker Container
   docker_container:
     name: raneto
-    image: "{{registry_host}}/{{registry_username}}/docker-raneto:{{raneto_version}}"
+    image: "linuxserver/raneto:{{raneto_version}}"
     pull: yes
     restart_policy: unless-stopped
     networks:

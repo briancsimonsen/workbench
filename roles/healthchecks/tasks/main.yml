@@ -8,7 +8,7 @@
 - name: Create Healthchecks Docker Container
   docker_container:
     name: healthchecks
-    image: "{{registry_host}}/{{registry_username}}/docker-healthchecks:{{healthchecks_version}}"
+    image: "linuxserver/healthchecks:{{healthchecks_version}}"
     pull: yes
     restart_policy: unless-stopped
     networks:

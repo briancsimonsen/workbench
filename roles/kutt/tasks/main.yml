@@ -19,7 +19,7 @@
 - name: Create Kutt Docker Container
   docker_container:
     name: kutt
-    image: "{{registry_host}}/{{registry_username}}/docker-kutt:{{kutt_version}}"
+    image: "dasmeta/kutt:{{kutt_version}}"
     pull: yes
     restart_policy: unless-stopped
     networks:

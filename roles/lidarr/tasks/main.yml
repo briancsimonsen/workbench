@@ -15,7 +15,7 @@
 - name: Create Lidarr Docker Container
   docker_container:
     name: lidarr
-    image: "{{registry_host}}/{{registry_username}}/docker-lidarr:{{lidarr_version}}"
+    image: "linuxserver/lidarr:{{lidarr_version}}"
     pull: yes
     restart_policy: unless-stopped
     comparisons:

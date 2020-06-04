@@ -8,7 +8,7 @@
 - name: Create VS Code Docker Container
   docker_container:
     name: vscode
-    image: "{{registry_host}}/{{registry_username}}/docker-vscode:{{vscode_version}}"
+    image: "linuxserver/code-server:{{vscode_version}}"
     pull: yes
     restart_policy: unless-stopped
     comparisons:

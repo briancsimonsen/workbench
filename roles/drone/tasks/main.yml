@@ -8,7 +8,7 @@
 - name: Create Drone Docker Container
   docker_container:
     name: drone
-    image: "{{registry_host}}/{{registry_username}}/docker-drone:{{drone_version}}"
+    image: "drone/drone:{{drone_version}}"
     user: root
     privileged: yes
     pull: yes

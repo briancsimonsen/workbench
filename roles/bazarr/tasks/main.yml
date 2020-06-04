@@ -15,7 +15,7 @@
 - name: Create Bazarr Docker Container
   docker_container:
     name: bazarr
-    image: "{{registry_host}}/{{registry_username}}/docker-bazarr:{{bazarr_version}}"
+    image: "linuxserver/bazarr:{{bazarr_version}}"
     pull: yes
     restart_policy: unless-stopped
     comparisons:

@@ -15,7 +15,7 @@
 - name: Create Pyload Docker Container
   docker_container:
     name: pyload
-    image: "{{registry_host}}/{{registry_username}}/docker-pyload:{{pyload_version}}"
+    image: "linuxserver/pyload:{{pyload_version}}"
     pull: yes
     restart_policy: unless-stopped
     networks:

@@ -8,7 +8,7 @@
 - name: Create MinIO Docker Container
   docker_container:
     name: minio
-    image: "{{registry_host}}/{{registry_username}}/docker-minio:{{minio_version}}"
+    image: "minio/minio:{{minio_version}}"
     pull: yes
     command: "server /data"
     restart_policy: unless-stopped
