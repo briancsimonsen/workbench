@@ -4,9 +4,9 @@ Workbench is a collection of playbooks and assets from my homelab. This project 
 
 ## Prerequisites
 
-item1 Ansible needs to be installed on the Control Machine
-item2 The Ansible User for my Playbooks Defaults to Ansible.
-item3 The Ansible User needs to exist on the Target Machine with a valid SSH Key and NOPASSWD Sudo
+1. Ansible needs to be installed on the Control Machine
+2. The Ansible User for my Playbooks Defaults to Ansible.
+3. The Ansible User needs to exist on the Target Machine with a valid SSH Key and NOPASSWD Sudo
 
 ## Usage
 
