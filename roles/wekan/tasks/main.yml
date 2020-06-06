@@ -15,7 +15,7 @@
 - name: Create Wekan Docker Container
   docker_container:
     name: wekan
-    image: "wekanteam/wekan:{{wekan_version}}"
+    image: "{{registry_host}}/{{registry_username}}/docker-wekan:{{wekan_version}}"
     pull: yes
     restart_policy: unless-stopped
     networks:
@@ -23,10 +23,10 @@
     networks_cli_compatible: yes
     state: started
     env:
-      MONGO_URL: "mongodb://wekandb:27017/wekan"
-      ROOT_URL: ""
-      MAIL_URL: "smtp://{{mail_host}}:{{mail_port}}"
-      MAIL_FROM: "Wekan Notifications <{{mail_user}}>"
+      MONGO_URL: "mongodb://{{wekan_database_user}}:{{wekan_database_password}}@mongodb:27017/wekan"
+      ROOT_URL: "https://wekan.authoritah.com"
+      MAIL_URL: "smtp://{{email_host}}:{{email_port}}"
+      MAIL_FROM: "Wekan Notifications <{{email_user}}>"
       ACCOUNTS_LOCKOUT_KNOWN_USERS_FAILURES_BEFORE: "3"
       ACCOUNTS_LOCKOUT_KNOWN_USERS_PERIOD: "60"
       ACCOUNTS_LOCKOUT_KNOWN_USERS_FAILURE_WINDOW: "15"

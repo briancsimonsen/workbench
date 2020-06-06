@@ -10,6 +10,8 @@ Workbench is a collection of playbooks and assets from my homelab. This project 
 
 ## Usage
 
+### All the passwords in the repository are randomly generated and should be changed
+
 `ansible-playbook -i inventory base_services.yml`
 
 ### Base Service
