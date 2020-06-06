@@ -5,13 +5,6 @@
     state: directory
   tags: radarr
 
-- name: Radarr Configuration Files
-  template:
-    src: "config.xml.j2"
-    dest: "{{project_directory}}/radarr/config.xml"
-  tags: radarr
-  notify: restart radarr
-
 - name: Create Radarr Docker Container
   docker_container:
     name: radarr

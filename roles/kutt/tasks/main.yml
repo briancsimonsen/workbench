@@ -11,7 +11,7 @@
     name: uuid-ossp
     db: kutt
     login_host: "{{postgres_host}}"
-    login_port: "{{postgres_port}}"
+    login_port: 5432
     login_password: "{{postgres_root_password}}"
     cascade: true
   tags: kutt
@@ -26,19 +26,19 @@
       - name: proxy
     env:
       SITE_NAME: "Authoritah"
-      DEFAULT_DOMAIN: "{{kutt_tld}}"
+      DEFAULT_DOMAIN: "kutt.{{project_tld}}"
       PORT: "3000"
       LINK_LENGTH: "6"
       DB_HOST: "database"
       DB_NAME: "{{kutt_database}}"
       DB_USER: "{{kutt_database_user}}"
       DB_PASSWORD: "{{kutt_database_password}}"
-      ADMIN_EMAILS: "XXXXXX@{{project_tld}}"
+      ADMIN_EMAILS: "admin@{{project_tld}}"
       REPORT_EMAIL: "abuse@{{project_tld}}"
       CONTACT_EMAIL: "contact@{{project_tld}}"
       JWT_SECRET: "{{kutt_jwt_secret}}"
-      REDIS_HOST: "{{redis_host}}"
-      REDIS_PORT: "{{redis_port}}"
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
       MAIL_HOST: "{{email_host}}"
       MAIL_PORT: "465"
       MAIL_SECURE: "true"
@@ -52,7 +52,7 @@
     labels:
       traefik.http.routers.kutt.entrypoints: "websecure"
       traefik.http.routers.kutt.tls: "true"
-      traefik.http.routers.kutt.rule: "Host(`{{kutt_tld}}`)"
+      traefik.http.routers.kutt.rule: "Host(`kutt.{{project_tld}}`)"
       traefik.http.routers.kutt.middlewares: "default-headers@file"
       traefik.http.routers.kutt.service: "kutt"
       traefik.http.services.kutt.loadbalancer.server.port: "3000"

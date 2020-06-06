@@ -17,7 +17,7 @@
     name: pg_trgm
     db: gitlab
     login_host: "{{postgres_host}}"
-    login_port: "{{postgres_port}}"
+    login_port: 5432
     login_password: "{{postgres_root_password}}"
     cascade: true
   tags: gitlab

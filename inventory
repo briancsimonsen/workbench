@@ -1,0 +1,67 @@
+[servers]
+# Change ansible_host to the IP Address of your target host machine
+# server1 can also be changed to name the target host
+server1 ansible_host=192.168.1.200
+
+[servers:vars]
+# Timezone
+default_timezone=UTC
+
+# Default Domain for Everything
+project_tld=damin.tld
+
+# Domain for Matrix and Riot
+chat_tld=damin.tld
+
+# Domain for Gitlab, Drone and the Gitlab Docker Registry
+git_tld=damin.tld
+
+# Digital Ocean Access Token for Letsencrypt Wildcard Cert
+digitalocean_token=
+
+# Global E-Mail Setting
+# Set to a resolvable hostname internal or external
+email_host=mail.damin.tld
+# SMTP no auth Port 25
+# SMTP TLS/SSL Port 465
+# SMTP STARTTLS Port 587
+email_port=587
+# E-Mail User for Notifications
+email_user=username
+email_password=password
+
+# Default Credentials for Mongo Database
+mongo_root_username=mongo
+mongo_root_password=MmphmPmvQTAzYFAtLG9HknT4EjDvhivC
+
+# Default Directory for applicaton data
+project_directory=/opt/apps
+
+# Default Directory for Media Files
+media_directory=/opt/media
+
+# Ansible User
+ansible_user=ansible
+ansible_python_interpreter=/usr/bin/python3
+# Default Credentials for Postgres Database
+postgres_root_user=root
+postgres_root_password=AyXJ7vQb3gXweeUJYxYm8JCmAuyRvfkH
+
+# Optional vars
+
+# API Key for Have I Been Pwned
+#bitwarden_hibp_api_key=
+
+# Add Drone CI to your Users Gitlab Account through the Application Settings Menu
+#drone_gitlab_client_id=
+#drone_gitlab_client_secret=
+
+#registry_username=ansible
+#registry_password=
+#registry_host=
+
+#matrix_notification_host=
+#matrix_notification_user=
+#matrix_notification_password=
+
+#gitlab_access_token=

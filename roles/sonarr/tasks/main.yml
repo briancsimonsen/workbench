@@ -5,13 +5,6 @@
     state: directory
   tags: sonarr
 
-- name: Sonarr Configuration Files
-  template:
-    src: config.xml.j2
-    dest: "{{project_directory}}/sonarr/config.xml"
-  tags: sonarr
-  notify: restart sonarr
-
 - name: Create Sonarr Docker Container
   docker_container:
     name: sonarr

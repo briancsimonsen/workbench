@@ -27,9 +27,6 @@
       ALLOWED_HOSTS: "*"
       SUPERUSER_EMAIL: "{{healthchecks_superuser_email}}"
       SUPERUSER_PASSWORD: "{{healthchecks_superuser_password}}"
-      MATRIX_HOMESERVER: "{{matrix_notification_host}}"
-      MATRIX_USER_ID: "{{healthchecks_matrix_user}}"
-      MATRIX_ACCESS_TOKEN: "{{healthchecks_matrix_access_token}}"
     volumes:
       - "{{project_directory}}/healthchecks:/config"
     labels:

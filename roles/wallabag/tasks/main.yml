@@ -40,8 +40,8 @@
       SYMFONY__ENV__FROM_EMAIL: "{{email_user}}"
       SYMFONY__ENV__DOMAIN_NAME: "https://wallabag.{{project_tld}}"
       SYMFONY__ENV__REDIS_SCHEME: "tcp"
-      SYMFONY__ENV__REDIS_HOST: "{{redis_host}}"
-      SYMFONY__ENV__REDIS_PORT: "{{redis_port}}"
+      SYMFONY__ENV__REDIS_HOST: redis
+      SYMFONY__ENV__REDIS_PORT: 6379
     volumes:
       - wallabag_images:/var/www/wallabag/web/assets/images
     labels:

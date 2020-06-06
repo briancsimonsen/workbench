@@ -9,9 +9,5 @@
     - redis
     - postgres
     - mongodb
-    - gitlab
-    - drone
-    - elasticsearch
-    - netbootxyz
     - raneto
     - homer

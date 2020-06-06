@@ -1,0 +1,10 @@
+---
+- name: Deploy Optional Services
+  hosts: servers
+  gather_facts: False
+  become: yes
+  roles:
+    - gitlab
+    - drone
+    - elasticsearch
+    - netbootxyz

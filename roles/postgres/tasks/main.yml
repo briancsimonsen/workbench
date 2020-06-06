@@ -29,7 +29,6 @@
 - name: Wait for Postgres to accept connections
   wait_for:
     host: "{{postgres_host}}"
-    port: "{{postgres_port}}"
     state: drained
     connect_timeout: 1
     timeout: 30

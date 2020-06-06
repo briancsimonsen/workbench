@@ -1,6 +1,9 @@
 ---
 - name: Ensure MondoDB Databases are Present.
   mongodb_user:
+    login_host: "{{mongo_host}}"
+    login_user: "{{mongo_root_username}}"
+    login_password: "{{mongo_root_password}}"
     database: "{{database_name}}"
     name: "{{database_user}}"
     password: "{{database_password}}"
