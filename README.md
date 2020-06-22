@@ -26,42 +26,42 @@ Workbench is a collection of playbooks and assets from my homelab. This project 
 
 ### Optional Service
 
-- [Gitlab](https://about.gitlab.com/)
-- [Drone](https://docs.drone.io/)
-- [ELK Stack](https://www.elastic.co/what-is/elk-stack)
-- [Netbootxyz](https://netboot.xyz/)
+- [Gitlab](https://about.gitlab.com/) - Web based DevOps lifecycle tool
+- [Drone](https://docs.drone.io/) - Container-Native, Continuous Delivery Platform
+- [ELK Stack](https://www.elastic.co/what-is/elk-stack) - Elasticsearch, Kibana, Logstash and Filebeat
+- [Netbootxyz](https://netboot.xyz/) - Network bootable operating system installer based on iPXE
 
 ### Core Service
 
-- [Alltube](https://github.com/Rudloff/alltube)
-- [Bitwarden](https://bitwarden.com/)
-- [Cyberchef](https://gchq.github.io/CyberChef/)
-- [Firefly](https://docs.firefly-iii.org/)
-- [Freshrss](https://freshrss.org/)
-- [Grafana](https://grafana.com/)
-- [Guacamole](https://guacamole.apache.org/)
-- [Healthchecks](https://healthchecks.io/)
-- [Keycloak](https://www.keycloak.org/)
-- [Kutt](https://kutt.it/)
-- [Matrix](https://matrix.org/)
-- [Minio](https://min.io/)
-- [Pyload](https://pyload.net/)
-- [Riot](https://about.riot.im/)
-- [Teedy](https://teedy.io/en/#!/)
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [Wallabag](https://wallabag.org/en)
-- [Webdav](https://github.com/BytemarkHosting/docker-webdav)
+- [Alltube](https://github.com/Rudloff/alltube) - HTML GUI for youtube-dl
+- [Bitwarden](https://bitwarden.com/) - Open source password management solutions for individuals, teams, and business organizations
+- [Cyberchef](https://gchq.github.io/CyberChef/) - A web app for encryption, encoding, compression and data analysis
+- [Firefly](https://docs.firefly-iii.org/) - A Personal Finances Manager
+- [Freshrss](https://freshrss.org/) - A free, self-hostable aggregator
+- [Grafana](https://grafana.com/) - The tool for beautiful monitoring and metric analytics & dashboards
+- [Guacamole](https://guacamole.apache.org/) - Clientless remote desktop gateway
+- [Healthchecks](https://healthchecks.io/) - A Cron Monitoring Tool written in Python & Django
+- [Keycloak](https://www.keycloak.org/) - Open Source Identity and Access Management For Modern Applications and Services
+- [Kutt](https://kutt.it/) - Free Modern URL Shortener
+- [Matrix](https://matrix.org/) - Matrix reference homeserver
+- [Minio](https://min.io/) - High performance object storage server compatible with Amazon S3 APIs
+- [Pyload](https://pyload.net/) - The free and open-source Download Manager written in pure Python
+- [Riot](https://about.riot.im/) - A glossy Matrix collaboration client for the web
+- [Teedy](https://teedy.io/en/#!/) - Lightweight document management system packed with all the features you can expect from big expensive solutions
+- [Visual Studio Code](https://code.visualstudio.com/) - Modern integrated development environment
+- [Wallabag](https://wallabag.org/en) - Save and classify articles. Read them later. Freely
+- [Webdav](https://github.com/BytemarkHosting/docker-webdav) - Nginx WebDAV Server for CalDAV and CardDAV
 
 ### Media Service
 
-- [Jackett](https://github.com/Jackett/Jackett)
-- [Hydra](https://github.com/theotherp/nzbhydra2)
-- [Qbittorrent](https://www.qbittorrent.org/)
+- [Jackett](https://github.com/Jackett/Jackett) - API Support for your favorite torrent trackers
+- [Hydra](https://github.com/theotherp/nzbhydra2) - Usenet meta search
+- [Qbittorrent](https://www.qbittorrent.org/) - BitTorrent client
 - [SABnzbd](https://sabnzbd.org/) - The automated Usenet download tool
-- [Airsonic](https://airsonic.github.io/docs/)
-- [Tdarr](https://github.com/HaveAGitGat/Tdarr)
-- [Lidarr](https://github.com/lidarr/Lidarr)
-- [Radarr](https://github.com/Radarr/Radarr)
-- [Sonarr](https://github.com/Sonarr/Sonarr)
-- [Bazarr](https://github.com/morpheus65535/bazarr)
-- [Jellyfin](https://github.com/jellyfin/jellyfin)
+- [Airsonic](https://airsonic.github.io/docs/) - Free and Open Source community driven media server
+- [Tdarr](https://github.com/HaveAGitGat/Tdarr)- Audio/Video library analytics + transcode automation using FFmpeg/HandBrake + video health checking
+- [Lidarr](https://github.com/lidarr/Lidarr) - Looks and smells like Sonarr but made for music
+- [Radarr](https://github.com/Radarr/Radarr) - A fork of Sonarr to work with movies à la Couchpotato
+- [Sonarr](https://github.com/Sonarr/Sonarr) - Smart PVR for newsgroup and bittorrent users
+- [Bazarr](https://github.com/morpheus65535/bazarr) - Bazarr is a companion application to Sonarr and Radarr that manages and downloads subtitles
+- [Jellyfin](https://github.com/jellyfin/jellyfin) - The Free Software Media System
